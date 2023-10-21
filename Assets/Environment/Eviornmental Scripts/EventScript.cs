@@ -12,11 +12,7 @@ public class EventScript : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyUp(KeyCode.Space))
-        { 
-            //throw this in OnTriggerEnter2Ds
-            //UnityEvent?.Invoke();
-        }
+
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
