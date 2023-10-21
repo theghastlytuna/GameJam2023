@@ -17,14 +17,23 @@ public class PlayerScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        transform.rotation = Quaternion.Euler(new Vector3(0, 0, GetLookAtAngle()));
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            Debug.Log("Throw");
+        }
+    }
+
+    private float GetLookAtAngle()
+    {
         mousePos = new Vector3(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y, 0);
 
         relativePos = mousePos - transform.position;
 
         angle = Mathf.Atan2(relativePos.y, relativePos.x) * Mathf.Rad2Deg - 90;
 
-        transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
-
-        Debug.Log(angle);
+        return angle;
     }
+
 }
