@@ -7,6 +7,7 @@ public class PlayerScript : MonoBehaviour
     Vector3 mousePos;
     Vector3 relativePos;
     float angle;
+    public GameObject limbPrefab;
 
     // Start is called before the first frame update
     void Start()
@@ -21,7 +22,7 @@ public class PlayerScript : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0))
         {
-            Debug.Log("Throw");
+            ThrowLimb(200);
         }
     }
 
@@ -36,4 +37,14 @@ public class PlayerScript : MonoBehaviour
         return angle;
     }
 
+    private GameObject ThrowLimb(float throwForce)
+    {
+        GameObject projectile = Instantiate(limbPrefab, transform.position, Quaternion.identity);
+
+        projectile.GetComponent<Rigidbody2D>().AddForce(relativePos.normalized * throwForce);
+
+        gameObject.GetComponent<Rigidbody2D>().AddForce(-relativePos.normalized * throwForce);
+
+        return projectile;
+    }
 }
