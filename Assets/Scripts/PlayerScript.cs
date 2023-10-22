@@ -22,7 +22,7 @@ public class PlayerScript : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0))
         {
-            ThrowLimb(200);
+            ThrowLimb(400);
         }
     }
 
