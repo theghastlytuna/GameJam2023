@@ -1,8 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class PlayerScript : MonoBehaviour
 {
@@ -58,6 +59,11 @@ public class PlayerScript : MonoBehaviour
                 NewThrowLimb(3);
             }
         }
+
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
     }
 
     private float GetLookAtAngle()
@@ -95,6 +101,7 @@ public class PlayerScript : MonoBehaviour
             if (Limbs[0] == null)
             {
                 Limbs[0] = limb;
+                limb.GetComponent<SpriteRenderer>().flipX = true;
                 limb.transform.SetParent(transform.GetChild(0));
                 _shinji.SetLimb(0, true);
             }
@@ -110,6 +117,7 @@ public class PlayerScript : MonoBehaviour
             if (Limbs[2] == null)
             {
                 Limbs[2] = limb;
+                limb.GetComponent<SpriteRenderer>().flipX = true;
                 limb.transform.SetParent(transform.GetChild(2));
                 _shinji.SetLimb(2, true);
             }

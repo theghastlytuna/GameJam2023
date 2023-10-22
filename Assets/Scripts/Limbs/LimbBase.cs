@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
 
 [System.Serializable]
 public class LimbBase : MonoBehaviour
@@ -14,6 +15,8 @@ public class LimbBase : MonoBehaviour
     CircleCollider2D chupaShapedCollider;
     Rigidbody2D _rb;
 
+    PlayerScript _player;
+
     SpriteRenderer _GlowieRenderer;
     Rigidbody myCock; //Hard and Rigid af;
     SoftJointLimitSpring yourCock; //Small, unimpressive.
@@ -26,9 +29,18 @@ public class LimbBase : MonoBehaviour
 
     public virtual void Throw(Vector3 forceDir)
     {
+        if (Debug_Printing)
+        {
+            EditorApplication.isPaused = true;
+            Debug.Log(forceDir);
+        }
+
         transform.parent = null;
         AttachedToBody = false;
+        _rb.angularVelocity = 0f;
         _rb.AddForce(forceDir);
+        _rb.freezeRotation = false;
+        _rb.AddTorque(10f);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -61,13 +73,16 @@ public class LimbBase : MonoBehaviour
         Grabbable = false;
         chupaShapedCollider.excludeLayers = LayerMask.GetMask("Player");
         _GlowieRenderer.enabled = false;
+        //_rb.freezeRotation = true;
+        _player = player;
     }
 
     private void Update()
     {
         if (AttachedToBody)
         {
-            transform.localPosition = Vector3.zero;
+            //transform.localPosition = Vector3.zero;
+            transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.identity);
         }
     }
 }
