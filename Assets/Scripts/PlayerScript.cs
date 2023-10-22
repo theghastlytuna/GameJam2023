@@ -16,6 +16,8 @@ public class PlayerScript : MonoBehaviour
     [SerializeField] LimbBase[] Limbs = new LimbBase[4];
     Rigidbody2D _rb;
 
+    [SerializeField] Shinji _shinji;
+
     private void Start()
     {
         _rb = GetComponent<Rigidbody2D>();
@@ -81,6 +83,7 @@ public class PlayerScript : MonoBehaviour
         Vector3 Force = new Vector3(dir.x * ThrowForce, dir.y * ThrowForce, dir.z * ThrowForce);
         Limbs[selectedLimb].Throw(Force);
         Limbs[selectedLimb] = null;
+        _shinji.SetLimb(selectedLimb, false);
 
         _rb.AddForce(-Force);
     }
@@ -93,11 +96,13 @@ public class PlayerScript : MonoBehaviour
             {
                 Limbs[0] = limb;
                 limb.transform.SetParent(transform.GetChild(0));
+                _shinji.SetLimb(0, true);
             }
             else
             {
                 Limbs[1] = limb;
                 limb.transform.SetParent(transform.GetChild(1));
+                _shinji.SetLimb(1, true);
             }
         }
         else
@@ -106,11 +111,13 @@ public class PlayerScript : MonoBehaviour
             {
                 Limbs[2] = limb;
                 limb.transform.SetParent(transform.GetChild(2));
+                _shinji.SetLimb(2, true);
             }
             else
             {
                 Limbs[3] = limb;
                 limb.transform.SetParent(transform.GetChild(3));
+                _shinji.SetLimb(3, true);
             }
         }
     }
