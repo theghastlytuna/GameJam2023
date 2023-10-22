@@ -104,6 +104,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ThrowForce: 200
+  Limbs:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  _shinji: {fileID: 0}
 --- !u!50 &5948279768866068333
 Rigidbody2D:
   serializedVersion: 4
@@ -140,7 +146,7 @@ CircleCollider2D:
   m_GameObject: {fileID: 1378333941300392421}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: f7d9a7ab9cd06ad488488607c393612d, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
