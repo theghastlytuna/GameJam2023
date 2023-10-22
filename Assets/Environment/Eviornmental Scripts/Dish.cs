@@ -10,7 +10,11 @@ public class Dish : MonoBehaviour
     
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.name == "Fish")
+        //delete this and add the fish into the editor
+        Fish = collision.gameObject;
+        rbFish = collision.GetComponent<Rigidbody2D>();
+
+        if (collision.gameObject.tag == "Limb")
         {
             rbFish.simulated = false;
             Fish.transform.position = gameObject.transform.position;
