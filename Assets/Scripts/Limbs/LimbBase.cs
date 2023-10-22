@@ -14,10 +14,13 @@ public class LimbBase : MonoBehaviour
     CircleCollider2D circleCollider;
     Rigidbody2D _rb;
 
+    SpriteRenderer _GlowieRenderer;
+
     private void Start()
     {
         _rb = GetComponent<Rigidbody2D>();
         circleCollider = GetComponent<CircleCollider2D>();
+        _GlowieRenderer = transform.GetChild(0).GetComponent<SpriteRenderer>();
     }
 
     public virtual void Throw(Vector3 forceDir)
@@ -56,6 +59,7 @@ public class LimbBase : MonoBehaviour
         player.AttachLimb(this);
         Grabbable = false;
         circleCollider.excludeLayers = LayerMask.GetMask("Player");
+        _GlowieRenderer.enabled = false;
     }
 
     private void Update()

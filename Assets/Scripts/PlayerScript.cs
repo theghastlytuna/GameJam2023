@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerScript : MonoBehaviour
@@ -71,6 +72,10 @@ public class PlayerScript : MonoBehaviour
 
     void NewThrowLimb(int selectedLimb)
     {
+        if (Limbs[selectedLimb] == null)
+        {
+            return;
+        }
         Debug.Log("Throwing Limb: " + selectedLimb);
         Vector3 dir = transform.up;
         Vector3 Force = new Vector3(dir.x * ThrowForce, dir.y * ThrowForce, dir.z * ThrowForce);
