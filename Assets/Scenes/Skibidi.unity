@@ -518,7 +518,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e26e1095c6d057e46af39b51a18041d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  limbPrefab: {fileID: 1431189852867744854, guid: 478f9eea9515e6d40b9610a91205ee7b, type: 3}
+  ThrowForce: 200
+  Limbs:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!50 &635682971
 Rigidbody2D:
   serializedVersion: 4
@@ -803,9 +808,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1475267165}
   - component: {fileID: 1475267164}
-  - component: {fileID: 1475267163}
   - component: {fileID: 1475267162}
   - component: {fileID: 1475267161}
+  - component: {fileID: 1475267166}
   m_Layer: 0
   m_Name: Polar Bear
   m_TagString: Untagged
@@ -875,19 +880,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &1475267163
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1475267160}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0b7629d0b33308244a2c1b88cd49e9b5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  forceMultiplier: 45
 --- !u!212 &1475267164
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -955,6 +947,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1475267166
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1475267160}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b7629d0b33308244a2c1b88cd49e9b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  forceMultiplier: 40
 --- !u!1 &1500346302
 GameObject:
   m_ObjectHideFlags: 0
