@@ -5,9 +5,9 @@ using UnityEngine;
 public class CameraScript : MonoBehaviour
 {
     public GameObject playerObject;
-    public Vector3 offset;
+    public Vector3 offset = new Vector3(0, 0, -10);
     [SerializeField, Range(1, 10)]
-    float smoothFactor;
+    float smoothFactor = 1.5f;
 
     // Start is called before the first frame update
     void Start()
