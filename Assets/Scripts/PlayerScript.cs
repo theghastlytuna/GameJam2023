@@ -1,18 +1,27 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerScript : MonoBehaviour
 {
-    Vector3 mousePos;
-    Vector3 relativePos;
-    float angle;
-    public GameObject limbPrefab;
+    //Player Parameter
+    [SerializeField] float ThrowForce = 200;
 
-    // Start is called before the first frame update
-    void Start()
+    //External Information Variables
+    Vector3 mousePos;
+    Vector3 playerToMouse;
+
+    [SerializeField] LimbBase[] Limbs = new LimbBase[4];
+    Rigidbody2D _rb;
+
+    private void Start()
     {
-        
+        _rb = GetComponent<Rigidbody2D>();
+        for (int i = 0; i < Limbs.Length; i++)
+        {
+            Limbs[i] = transform.GetChild(i).transform.GetChild(0).GetComponent<LimbBase>();
+        }
     }
 
     // Update is called once per frame
@@ -20,9 +29,31 @@ public class PlayerScript : MonoBehaviour
     {
         transform.rotation = Quaternion.Euler(new Vector3(0, 0, GetLookAtAngle()));
 
-        if (Input.GetMouseButtonDown(0))
+        if (!Input.GetKey(KeyCode.LeftShift))
         {
-            ThrowLimb(200);
+            if (Input.GetMouseButtonDown(0))
+            {
+                Debug.Log("Left Arm");
+                NewThrowLimb(0);
+            }
+            if (Input.GetMouseButtonDown(1))
+            {
+                Debug.Log("Right Arm");
+                NewThrowLimb(1);
+            }
+        }
+        else
+        {
+            if (Input.GetMouseButtonDown(0))
+            {
+                Debug.Log("Left Leg");
+                NewThrowLimb(2);
+            }
+            if (Input.GetMouseButtonDown(1))
+            {
+                Debug.Log("Right Leg");
+                NewThrowLimb(3);
+            }
         }
     }
 
@@ -30,21 +61,73 @@ public class PlayerScript : MonoBehaviour
     {
         mousePos = new Vector3(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y, 0);
 
-        relativePos = mousePos - transform.position;
+        playerToMouse = mousePos - transform.position;
 
-        angle = Mathf.Atan2(relativePos.y, relativePos.x) * Mathf.Rad2Deg - 90;
+        float angle = Mathf.Atan2(playerToMouse.y, playerToMouse.x) * Mathf.Rad2Deg - 90;
 
         return angle;
     }
 
-    private GameObject ThrowLimb(float throwForce)
+
+    void NewThrowLimb(int selectedLimb)
     {
-        GameObject projectile = Instantiate(limbPrefab, transform.position, Quaternion.identity);
+        Debug.Log("Throwing Limb: " + selectedLimb);
+        Vector3 dir = transform.up;
+        Vector3 Force = new Vector3(dir.x * ThrowForce, dir.y * ThrowForce, dir.z * ThrowForce);
+        Limbs[selectedLimb].Throw(Force);
+        Limbs[selectedLimb] = null;
 
-        projectile.GetComponent<Rigidbody2D>().AddForce(relativePos.normalized * throwForce);
+        _rb.AddForce(-Force);
+    }
 
-        gameObject.GetComponent<Rigidbody2D>().AddForce(-relativePos.normalized * throwForce);
+    public void AttachLimb(LimbBase limb)
+    {
+        if(limb.limbType == LimbSlot.ARM)
+        {
+            if (Limbs[0] == null)
+            {
+                Limbs[0] = limb;
+                limb.transform.SetParent(transform.GetChild(0));
+            }
+            else
+            {
+                Limbs[1] = limb;
+                limb.transform.SetParent(transform.GetChild(1));
+            }
+        }
+        else
+        {
+            if (Limbs[2] == null)
+            {
+                Limbs[2] = limb;
+                limb.transform.SetParent(transform.GetChild(2));
+            }
+            else
+            {
+                Limbs[3] = limb;
+                limb.transform.SetParent(transform.GetChild(3));
+            }
+        }
+    }
 
-        return projectile;
+    public bool SlotsOpen(int type)
+    {
+        if(type == 0)
+        {
+            if (Limbs[0] == null || Limbs[1] == null)
+            {
+                return true;
+            }
+            return false;
+        }
+        else if(type == 1)
+        {
+            if (Limbs[2] == null || Limbs[3] == null)
+            {
+                return true;
+            }
+            return false;
+        }
+        return false;
     }
 }
