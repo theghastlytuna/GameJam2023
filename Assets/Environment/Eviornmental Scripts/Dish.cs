@@ -31,7 +31,6 @@ public class Dish : MonoBehaviour
             {
                 penguin.isLerping = true;
             }
-
         }
     }
 }

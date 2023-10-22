@@ -18,5 +18,6 @@ public class EventScript : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         Triggered.Invoke();
+        Debug.Log("Invoked");
     }
 }
