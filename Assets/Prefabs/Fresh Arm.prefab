@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3241994015238713632}
   m_Layer: 7
   m_Name: Glowie
-  m_TagString: Untagged
+  m_TagString: Limb
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -99,7 +99,7 @@ GameObject:
   - component: {fileID: 7526819859305815308}
   m_Layer: 7
   m_Name: Fresh Arm
-  m_TagString: Untagged
+  m_TagString: Limb
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

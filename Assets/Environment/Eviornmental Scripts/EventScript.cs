@@ -10,11 +10,6 @@ public class EventScript : MonoBehaviour
     //public static event Action Event;
     [SerializeField] UnityEvent Triggered;
 
-    private void Update()
-    {
-
-    }
-
     private void OnCollisionEnter2D(Collision2D collision)
     {
         Triggered.Invoke();
