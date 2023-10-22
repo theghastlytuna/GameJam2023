@@ -5,5 +5,13 @@ public enum LimbEnum
     ROBOT = 2,
     TENTACLE = 3,
     GUN = 4,
-    BOOMERANG = 5
+    BOOMERANG = 5,
+    PEENOR = 69
+}
+
+public enum LimbSlot
+{
+    ARM,
+    LEG,
+    COCKULAR
 }

@@ -5,18 +5,69 @@ using UnityEngine;
 [System.Serializable]
 public class LimbBase : MonoBehaviour
 {
-    public LimbEnum limbType;
-    [SerializeField] Sprite limbSprite;
-    [SerializeField] float launchForce;
+    [SerializeField] bool Debug_Printing = false;
 
-    /// <summary>
-    /// Launches the player character in the direction towards the mouse cursor with a force of launchForce
-    /// </summary>
-    public virtual void LaunchPlayer()
+    public LimbSlot limbType;
+    [SerializeField] bool Grabbable = true;
+    [SerializeField] bool AttachedToBody;
+
+    CircleCollider2D chupaShapedCollider;
+    Rigidbody2D _rb;
+
+    SpriteRenderer _GlowieRenderer;
+    Rigidbody myCock; //Hard and Rigid af;
+    SoftJointLimitSpring yourCock; //Small, unimpressive.
+    private void Start()
     {
-        Rigidbody2D playerRigid = transform.parent.parent.GetComponent<Rigidbody2D>();
-        Vector2 forceDir = (playerRigid.transform.position - Camera.main.ScreenToWorldPoint(Input.mousePosition)).normalized;
-        //Debug.Log(forceDir);
-        playerRigid.AddForce(forceDir * launchForce, ForceMode2D.Impulse);
+        _rb = GetComponent<Rigidbody2D>();
+        chupaShapedCollider = GetComponent<CircleCollider2D>();
+        _GlowieRenderer = transform.GetChild(0).GetComponent<SpriteRenderer>();
+    }
+
+    public virtual void Throw(Vector3 forceDir)
+    {
+        transform.parent = null;
+        AttachedToBody = false;
+        _rb.AddForce(forceDir);
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (Debug_Printing)
+        {
+            Debug.Log("Collided");
+        }
+        if (Grabbable && collision.gameObject.GetComponent<PlayerScript>())
+        {
+            if (Debug_Printing)
+            {
+                Debug.Log("Grabbable and hit Player");
+            }
+            if (collision.gameObject.GetComponent<PlayerScript>().SlotsOpen(((int)limbType)))
+            {
+                if (Debug_Printing)
+                {
+                    Debug.Log("Player has available slots");
+                }
+                AttachToBody(collision.gameObject.GetComponent<PlayerScript>());
+            }
+        }
+    }
+
+    void AttachToBody(PlayerScript player)
+    {
+        AttachedToBody = true;
+        player.AttachLimb(this);
+        Grabbable = false;
+        chupaShapedCollider.excludeLayers = LayerMask.GetMask("Player");
+        _GlowieRenderer.enabled = false;
+    }
+
+    private void Update()
+    {
+        if (AttachedToBody)
+        {
+            transform.localPosition = Vector3.zero;
+        }
     }
 }

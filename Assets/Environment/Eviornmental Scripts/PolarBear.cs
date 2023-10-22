@@ -9,7 +9,7 @@ public class PolarBear : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.gameObject.layer == 7)
+        if (collision.gameObject.layer == 7)
         {
             GameObject player = collision.gameObject;
             float forceAmount = (0.5f * collision.rigidbody.mass * Mathf.Pow(collision.relativeVelocity.magnitude, 2)) * forceMultiplier;
