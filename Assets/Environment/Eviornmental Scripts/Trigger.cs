@@ -5,6 +5,7 @@ using UnityEngine;
 public class Trigger : MonoBehaviour
 {
     [SerializeField] Wall wall;
+    [SerializeField] string LimbType;
 
     // Start is called before the first frame update
     void Start()
@@ -20,6 +21,10 @@ public class Trigger : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        wall.DropWall();
+        if (collision.gameObject.name == LimbType)
+        {
+            wall.DropWall();
+        }
+
     }
 }

@@ -5,6 +5,7 @@ using UnityEngine;
 public class Wall : MonoBehaviour
 {
     private bool Broken = false;
+    [SerializeField] private string objectCollided;
 
     // Start is called before the first frame update
     void Start()
