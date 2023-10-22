@@ -447,6 +447,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8848647625481915268, guid: ce8312a9d6f4d6644af1fafecd60ef56, type: 3}
+      propertyPath: Debug_Printing
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -514,6 +518,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5681343102229793684, guid: ce8312a9d6f4d6644af1fafecd60ef56, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8848647625481915268, guid: ce8312a9d6f4d6644af1fafecd60ef56, type: 3}
+      propertyPath: Debug_Printing
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -5713,6 +5721,10 @@ PrefabInstance:
       propertyPath: m_Constraints
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 8128751047465382769, guid: e7bd72543e9200549a4b74e4c3de1ee0, type: 3}
+      propertyPath: Debug_Printing
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8657015393685882292, guid: e7bd72543e9200549a4b74e4c3de1ee0, type: 3}
       propertyPath: m_Name
       value: Fresh Arm (1)
@@ -6007,6 +6019,10 @@ PrefabInstance:
     - target: {fileID: 6391507275536810444, guid: e7bd72543e9200549a4b74e4c3de1ee0, type: 3}
       propertyPath: m_Constraints
       value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8128751047465382769, guid: e7bd72543e9200549a4b74e4c3de1ee0, type: 3}
+      propertyPath: Debug_Printing
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8657015393685882292, guid: e7bd72543e9200549a4b74e4c3de1ee0, type: 3}
       propertyPath: m_Name
