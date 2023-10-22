@@ -11,15 +11,16 @@ public class LimbBase : MonoBehaviour
     [SerializeField] bool Grabbable = true;
     [SerializeField] bool AttachedToBody;
 
-    CircleCollider2D circleCollider;
+    CircleCollider2D chupaShapedCollider;
     Rigidbody2D _rb;
 
     SpriteRenderer _GlowieRenderer;
-
+    Rigidbody myCock; //Hard and Rigid af;
+    SoftJointLimitSpring yourCock; //Small, unimpressive.
     private void Start()
     {
         _rb = GetComponent<Rigidbody2D>();
-        circleCollider = GetComponent<CircleCollider2D>();
+        chupaShapedCollider = GetComponent<CircleCollider2D>();
         _GlowieRenderer = transform.GetChild(0).GetComponent<SpriteRenderer>();
     }
 
@@ -58,7 +59,7 @@ public class LimbBase : MonoBehaviour
         AttachedToBody = true;
         player.AttachLimb(this);
         Grabbable = false;
-        circleCollider.excludeLayers = LayerMask.GetMask("Player");
+        chupaShapedCollider.excludeLayers = LayerMask.GetMask("Player");
         _GlowieRenderer.enabled = false;
     }
 
