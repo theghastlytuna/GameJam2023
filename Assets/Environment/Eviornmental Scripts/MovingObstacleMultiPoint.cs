@@ -36,14 +36,18 @@ public class MovingObstacleMultiPoint : MonoBehaviour
                 if (_timer > waitTime)
                 {
                     startPos = transform.position;
-                    if (pointIndex == points.Length)
+
+                    if (pointIndex == points.Length - 1)
                     {
-                    pointIndex = 0;
+                        pointIndex = 0;
+                        Debug.Log("pointIndex Reset");
                     }
                     else
                     {
                         pointIndex++;
+                        Debug.Log(pointIndex.ToString());
                     }
+
                     endPos = points[pointIndex].transform.position;
                     _timer = _timer - waitTime;
                     isLerping = true;
