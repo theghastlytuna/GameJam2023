@@ -5,18 +5,47 @@ using UnityEngine;
 [System.Serializable]
 public class LimbBase : MonoBehaviour
 {
-    public LimbEnum limbType;
-    [SerializeField] Sprite limbSprite;
-    [SerializeField] float launchForce;
+    public LimbSlot limbType;
+    [SerializeField] bool Grabbable = true;
+    [SerializeField] bool AttachedToBody;
 
-    /// <summary>
-    /// Launches the player character in the direction towards the mouse cursor with a force of launchForce
-    /// </summary>
-    public virtual void LaunchPlayer()
+    Rigidbody2D _rb;
+
+    private void Start()
     {
-        Rigidbody2D playerRigid = transform.parent.parent.GetComponent<Rigidbody2D>();
-        Vector2 forceDir = (playerRigid.transform.position - Camera.main.ScreenToWorldPoint(Input.mousePosition)).normalized;
-        //Debug.Log(forceDir);
-        playerRigid.AddForce(forceDir * launchForce, ForceMode2D.Impulse);
+        _rb = GetComponent<Rigidbody2D>();
+    }
+
+    public virtual void Throw(Vector3 forceDir)
+    {
+        transform.parent = null;
+        AttachedToBody = false;
+        _rb.AddForce(forceDir);
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (Grabbable && collision.gameObject.GetComponent<PlayerScript>())
+        {
+            if (collision.gameObject.GetComponent<PlayerScript>().SlotsOpen(((int)limbType)))
+            {
+                AttachToBody(collision.gameObject.GetComponent<PlayerScript>());
+            }
+        }
+    }
+
+    void AttachToBody(PlayerScript player)
+    {
+        AttachedToBody = true;
+        player.AttachLimb(this);
+        Grabbable = false;
+    }
+
+    private void Update()
+    {
+        if (AttachedToBody)
+        {
+            transform.localPosition = Vector3.zero;
+        }
     }
 }

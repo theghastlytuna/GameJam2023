@@ -7,3 +7,9 @@ public enum LimbEnum
     GUN = 4,
     BOOMERANG = 5
 }
+
+public enum LimbSlot
+{
+    ARM,
+    LEG
+}
